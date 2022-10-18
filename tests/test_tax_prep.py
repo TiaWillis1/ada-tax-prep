@@ -129,7 +129,18 @@ def few_valid_deductions():
         "charity": 5000,
         "mortgage": 5000,
         "child": 5000
-    }    
+    }   
+
+@pytest.fixture
+def new_valid_deductions():
+    return {
+        "charity": 5000,
+        "mortgage": 5000,
+        "child": 5000,
+        "tuition": 5000,
+        "healthcare": 5000,
+        "home office": 5000
+    } 
 
 def test_deducted_income_cannot_fall_below_zero():
     income = 10000
@@ -151,6 +162,13 @@ def test_applies_itemized_deductions(all_valid_deductions):
     deducted_income = calculate_deducted_income_2020(income, all_valid_deductions)
 
     assert deducted_income == 25000
+
+def test_applies_new_itemized_deductions(new_valid_deductions):
+    income = 50000
+
+    deducted_income = calculate_deducted_income_2020(income, new_valid_deductions)
+
+    assert deducted_income == 20000
 
 def test_ignores_invalid_itemized_deductions(some_invalid_deductions):
     income = 50000
