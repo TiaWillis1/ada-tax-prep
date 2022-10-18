@@ -8,7 +8,7 @@ def test_no_income():
 
     taxes = calculate_tax_2020(income)
 
-    assert taxes == 0
+    assert taxes== 0
 
 def test_max_bracket_one():
     income = 9875
